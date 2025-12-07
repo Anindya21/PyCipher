@@ -1,6 +1,98 @@
-def main():
-    print("Hello from crypto-project!")
+import numpy as np
+import random
 
 
-if __name__ == "__main__":
-    main()
+'''
+Playfair Cipher Encryption
+
+key: 2D key matrix 
+[17 14
+ 21 9]
+
+As the key is of 2x2 size, have to process the plaintext 2 letters at a time
+
+plaintext: Random text "Tomorrow is the date to execute the event"--> "TO MO RR OW IS TH ED AT ET OE XE CU TE TH EE VE NT"
+
+ciphertext: Plaintext x key -> C = []
+'''
+
+
+def convert_plaintext(plaintext):
+    
+    word = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5, "G":6, "H":7, "I":8, "J":9, "K":10, 
+            "L":11, "M":12, "N":13, "O":14, "P":15, "Q":16, "R":17, "S":18, "T":19, "U":20, 
+            "V":21, "W":22, "X":23, "Y":24,"Z":25}
+    
+    plaintext= plaintext.replace(" ","")
+    plaintext= plaintext.upper()
+
+    conv_plaintext= []
+    if len(plaintext)%2!=0:
+        plaintext+= "X"
+
+    for i in range(0, len(plaintext), 1):
+        conv_plaintext.append(plaintext[i:i+1])
+    
+
+    for i in range(0,len(conv_plaintext)):
+        if conv_plaintext[i] in word:
+            conv_plaintext[i] = word[conv_plaintext[i]]
+         
+    return conv_plaintext
+
+
+def generate_key():
+    key = np.random.randint(0,26,size=(2,2))
+
+    print(f"Key ---> {key}")
+    return key
+
+
+plaintext= input("Enter the plaintext: ")
+
+def generate_ciphertext(plaintext):
+    
+    word = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5, "G":6, "H":7, "I":8, "J":9, "K":10, 
+            "L":11, "M":12, "N":13, "O":14, "P":15, "Q":16, "R":17, "S":18, "T":19, "U":20, 
+            "V":21, "W":22, "X":23, "Y":24,"Z":25}
+
+    key  = generate_key()
+
+    ciphertext= []
+    
+    for i in range(0, len(plaintext), 2):
+        # print(f"Plaintext i and i+1 ==> {plaintext[i:i+2]}")
+        pair = np.array([[plaintext[i], plaintext[i+1]]])
+
+        # print(f"Pair matrix: {pair}")
+
+        cipher_pair = np.matmul(pair, key)%26
+        
+        # print(f"After multiplication: {cipher_pair}")
+
+        ciphertext.append(cipher_pair[0][0].item())
+        ciphertext.append(cipher_pair[0][1].item())
+
+
+    # print("Ciphertext matrix: ", ciphertext)
+
+    for i in range(0,len(ciphertext)):
+        if ciphertext[i] in word.values():
+
+            for key, value in word.items():
+                if value == ciphertext[i]:
+                    ciphertext[i] = key
+
+    
+    final_cipher= "".join(ciphertext)
+    
+
+    return print(f"Ciphertext- {final_cipher}")
+
+
+print("\nPlaintext: ", plaintext)
+
+conv_plaintext= convert_plaintext(plaintext)
+
+cipher = generate_ciphertext(conv_plaintext)
+
