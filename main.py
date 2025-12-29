@@ -1,6 +1,2 @@
-def main():
-    print("Hello from crypto-project!")
+from . import hill
 
-
-if __name__ == "__main__":
-    main()
