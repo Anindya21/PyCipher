@@ -16,7 +16,26 @@ plaintext: Random text "Tomorrow is the date to execute the event"--> "TO MO RR 
 
 ciphertext: Plaintext x key -> C = []
 '''
+def mod_inverse(a, m=26):
+    for x in range(1, m):
+        if (a * x) % m == 1:
+            return x
+    raise ValueError("No modular inverse exists")
 
+
+def matrix_mod_inverse(key, m=26):
+    a, b = key[0]
+    c, d = key[1]
+
+    det = (a*d - b*c) % m
+
+    det_inv = mod_inverse(det, m)
+
+    adj = np.array([[ d, -b],
+                    [-c,  a]])
+
+    key_inv = (det_inv * adj) % m
+    return key_inv
 
 def convert_plaintext(plaintext):
     
@@ -57,8 +76,7 @@ def convert_ciphertext(ciphertext):
     
 
     for i in range(0,len(conv_ciphertext)):
-        if conv_ciphertext[i] in word:
-            conv_ciphertext[i] = word[conv_ciphertext[i]]
+        conv_ciphertext[i] = word[conv_ciphertext[i]]
          
     return conv_ciphertext
 
@@ -143,9 +161,37 @@ def retrieve_plaintext(ciphertext, key):
 
     key = generate_key(key)
 
-    key_inv = np.linalg.inv(key)
+    key_inv = matrix_mod_inverse(key)
 
     plaintext=[]
+
+    for i in range(0, len(ciphertext), 2):
+        
+        pair = np.array([[ciphertext[i], ciphertext[i+1]]])
+
+        print(f"Pair matrix: {pair}")
+
+        plain_pair = np.matmul(pair, key_inv)%26
+        
+        # print(f"After multiplication: {cipher_pair}")
+
+        plaintext.append(int(round(plain_pair[0][0].item())))
+        plaintext.append(int(round(plain_pair[0][1].item())))
+
+
+    # print("Ciphertext matrix: ", ciphertext)
+
+    for i in range(0,len(plaintext)):
+        for key, value in word.items():
+            if value == plaintext[i]:
+                plaintext[i] = key
+                break
+
+    
+    final_plain= "".join(plaintext)
+
+    return print(f"Plaintext- {final_plain}")
+
 
 
 
@@ -192,15 +238,25 @@ def retrieve_plaintext(ciphertext, key):
 
 
 
+print("Hill Cipher Encryption")
 
+print("----------------------")
 
-plaintext= input("Enter the plaintext: ")
-key = input("Enter the 4 letter key: ")
+print("For Encryption press E for Decryption press D")
 
-conv_plaintext= convert_plaintext(plaintext)
+mode= input("Enter the mode: ")
 
-cipher = generate_ciphertext(conv_plaintext, key)
+if mode.upper() == "E":
+    plaintext= input("Enter the plaintext: ")
+    key = input("Enter the 4 letter key: ")
+    conv_plaintext= convert_plaintext(plaintext)
+    cipher = generate_ciphertext(conv_plaintext, key)
 
+elif mode.upper() == "D":
+    ciphertext= input("Enter the ciphertext: ")
+    key = input("Enter the 4 letter key: ")
+    conv_ciphertext= convert_ciphertext(ciphertext)
+    plain = retrieve_plaintext(conv_ciphertext, key)
 # ciphertext= input("Enter the ciphertext: ")
 # conv_ciphertext= convert_ciphertext(ciphertext)
 
