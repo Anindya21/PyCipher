@@ -26,3 +26,7 @@ Plaintext: [19, 14, 3, 0, 24, 8, 18, 0, 18, 8, 6, 13, 8, 5, 8, 2, 0, 13, 19, 3, 
 Plaintext: [7, 4, 11, 11, 14, 23] 
  Key: hill
  Ciphertext: PWQBNB
+
+Plaintext: [7, 4, 11, 11, 14, 13, 0, 5, 8, 18, 7, 14, 22, 0, 17, 4, 24, 14, 20, 19, 14, 3, 0, 24] 
+ Key: hill
+ Ciphertext: PWQBHVDDUCVCYUHYKILFBPEE
