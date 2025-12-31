@@ -33,13 +33,33 @@ def calculate_cipher(plaintext, shift):
     return final_cipher
 
 
+def retrieve_plaintext(ciphertext,shift):
+    plaintext=[]
+
+    for i in range(0, len(ciphertext)):
+        plain_char = (ciphertext[i] - shift) % 26
+        plaintext.append(plain_char)
+    
+    plaintext= word_mapper(plaintext, 'n2w')
+    final_plain = "".join(plaintext)
+    return final_plain
+
+
 
 print("Ceaser Cipher")
-shift= int(input("Enter shift value: "))
-plaintext= input("Enter Plaintext: ")
+print("---------------------")
 
-ciphertext= calculate_cipher(word_mapper(plaintext,"w2n"), shift)
+mode = input("Choose Mode (E/D): ").upper()
 
-print(f"Ciphertext: {ciphertext}", end="")
+if mode == 'E':
+    shift= int(input("Enter shift value: "))
+    plaintext= input("Enter Plaintext: ")
+    ciphertext= calculate_cipher(word_mapper(plaintext,"w2n"), shift)
+    print(f"Ciphertext: {ciphertext}", end="")
 
+if mode == 'D':
+    shift= int(input("Enter shift value: "))
+    ciphertext= input("Enter Ciphertext: ")
+    plaintext= retrieve_plaintext(word_mapper(ciphertext,"w2n"), shift)
+    print(f"Plaintext: {plaintext}", end="")
 
