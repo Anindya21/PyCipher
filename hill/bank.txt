@@ -42,3 +42,11 @@ Plaintext: [7, 4, 8, 11, 7, 8, 19, 11, 4, 17, 19, 14, 12, 12, 14, 17, 17, 14, 22
 Plaintext: HEILHITLERTOMORROWDAWNBEGINTHEATTACKONKURSKX 
  Key: hill
  Ciphertext: PWVDHOUNHLBUEQULCQVYLHZAAGOBPWBBDWUWHVEOFWLV
+
+Plaintext: HELLOWORLD 
+ Key: hill
+ Ciphertext: PWQBCQZNGR
+
+Plaintext: HELLOX 
+ Key: hill
+ Ciphertext: PWQBNB

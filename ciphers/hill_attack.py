@@ -78,9 +78,9 @@ def attack_hill(known_plaintext, known_ciphertext):
     return final_key
 
 
-kp = input("Enter known plaintext (min 4 letters): ")
-kc = input("Enter corresponding ciphertext: ")
+# kp = input("Enter known plaintext (min 4 letters): ")
+# kc = input("Enter corresponding ciphertext: ")
 
-recovered_key = attack_hill(kp, kc)
+# recovered_key = attack_hill(kp, kc)
 
-print(f"Key --> {recovered_key}")
+# print(f"Key --> {recovered_key}")

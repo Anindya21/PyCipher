@@ -107,13 +107,13 @@ def generate_ciphertext(plaintext, key):
     plaintext = hill_word_mapper(plaintext, 'n2w', pad=False)
     plaintext= "".join(plaintext)
 
-    with open("../hill/bank.txt", "a") as f:
+    with open("hill/bank.txt", "a") as f:
         f.write(f"\nPlaintext: {plaintext} \n Key: {print_key}\n Ciphertext: {final_cipher}\n")
 
-    return print(f"Ciphertext- {final_cipher}")
+    return final_cipher
 
 
-def retrieve_plaintext(ciphertext, key):
+def hill_retrieve_plaintext(ciphertext, key):
 
     key = generate_key(key)
 
@@ -141,27 +141,27 @@ def retrieve_plaintext(ciphertext, key):
 
     final_plain= "".join(plaintext)
 
-    return print(f"Plaintext- {final_plain}")
+    return final_plain
 
 
 
-print("Hill Cipher Encryption")
+# print("Hill Cipher Encryption")
 
-print("----------------------")
+# print("----------------------")
 
-print("For Encryption press E for Decryption press D")
+# print("For Encryption press E for Decryption press D")
 
-mode= input("Enter the mode: ")
+# mode= input("Enter the mode: ")
 
-if mode.upper() == "E":
-    plaintext= input("Enter the plaintext: ")
-    key = input("Enter the 4 letter key: ")
-    conv_plaintext= hill_word_mapper(plaintext, "w2n",pad=True)
-    cipher = generate_ciphertext(conv_plaintext, key)
+# if mode.upper() == "E":
+#     plaintext= input("Enter the plaintext: ")
+#     key = input("Enter the 4 letter key: ")
+#     conv_plaintext= hill_word_mapper(plaintext, "w2n",pad=True)
+#     cipher = generate_ciphertext(conv_plaintext, key)
 
-elif mode.upper() == "D":
-    ciphertext= input("Enter the ciphertext: ")
-    key = input("Enter the 4 letter key: ")
-    conv_ciphertext= hill_word_mapper(ciphertext, "w2n", pad=False)
-    plain = retrieve_plaintext(conv_ciphertext, key)
+# elif mode.upper() == "D":
+#     ciphertext= input("Enter the ciphertext: ")
+#     key = input("Enter the 4 letter key: ")
+#     conv_ciphertext= hill_word_mapper(ciphertext, "w2n", pad=False)
+#     plain = hill_retrieve_plaintext(conv_ciphertext, key)
 

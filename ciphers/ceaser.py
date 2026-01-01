@@ -20,7 +20,7 @@ def word_mapper(text,mode):
         return [reverse_chars[n] for n in text]
     
 
-def calculate_cipher(plaintext, shift):
+def calculate_cipher(plaintext, shift=3):
     plaintext= word_mapper(plaintext,"w2n")
     ciphertext= []
 
@@ -34,7 +34,7 @@ def calculate_cipher(plaintext, shift):
     return final_cipher
 
 
-def retrieve_plaintext(ciphertext,shift):
+def retrieve_plaintext(ciphertext,shift=3):
     ciphertext= word_mapper(ciphertext,"w2n")
     plaintext=[]
 
@@ -48,20 +48,20 @@ def retrieve_plaintext(ciphertext,shift):
 
 
 
-print("Ceaser Cipher")
-print("---------------------")
+# print("Ceaser Cipher")
+# print("---------------------")
 
-mode = input("Choose Mode (E/D): ").upper()
+# mode = input("Choose Mode (E/D): ").upper()
 
-if mode == 'E':
-    shift= int(input("Enter shift value: "))
-    plaintext= input("Enter Plaintext: ")
-    ciphertext= calculate_cipher(plaintext, shift)
-    print(f"Ciphertext: {ciphertext}", end="")
+# if mode == 'E':
+#     shift= int(input("Enter shift value: "))
+#     plaintext= input("Enter Plaintext: ")
+#     ciphertext= calculate_cipher(plaintext, shift)
+#     print(f"Ciphertext: {ciphertext}", end="")
 
-if mode == 'D':
-    shift= int(input("Enter shift value: "))
-    ciphertext= input("Enter Ciphertext: ")
-    plaintext= retrieve_plaintext(ciphertext, shift)
-    print(f"Plaintext: {plaintext}", end="")
+# if mode == 'D':
+#     shift= int(input("Enter shift value: "))
+#     ciphertext= input("Enter Ciphertext: ")
+#     plaintext= retrieve_plaintext(ciphertext, shift)
+#     print(f"Plaintext: {plaintext}", end="")
 
