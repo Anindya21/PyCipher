@@ -72,7 +72,10 @@ def attack_hill(known_plaintext, known_ciphertext):
 
     key = np.matmul(P_inv, cipher_matrix) % 26
 
-    return key
+    key = word_mapper(key.flatten().tolist(), 'n2w')
+
+    final_key = "".join(key)
+    return final_key
 
 
 kp = input("Enter known plaintext (min 4 letters): ")
@@ -80,7 +83,4 @@ kc = input("Enter corresponding ciphertext: ")
 
 recovered_key = attack_hill(kp, kc)
 
-recovered_key_letters = word_mapper(recovered_key.flatten().tolist(), 'n2w')
-
-recovered_key_letters = "".join(recovered_key_letters)
-print(f"Key --> {recovered_key_letters}")
+print(f"Key --> {recovered_key}")
