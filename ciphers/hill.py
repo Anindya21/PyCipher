@@ -1,10 +1,8 @@
 import numpy as np
-import random
 import math
 
-
 '''
-Playfair Cipher Encryption
+Hill Cipher Encryption
 
 key: 2D key matrix 
 [17 14
@@ -81,23 +79,30 @@ def convert_ciphertext(ciphertext):
     return conv_ciphertext
 
 
-def word_mapper(text):
-    word = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5, "G":6, "H":7, "I":8, "J":9, "K":10, 
-            "L":11, "M":12, "N":13, "O":14, "P":15, "Q":16, "R":17, "S":18, "T":19, "U":20, 
-            "V":21, "W":22, "X":23, "Y":24,"Z":25}
-    text= text.upper()
+def word_mapper(text,mode):
+    chars= {'A':0, 'B':1, 'C':2, 'D':3, 'E':4, 'F':5, 'G':6, 'H':7, 'I':8, 'J':9, 'K':10, 'L':11, 'M':12,
+            'N':13, 'O':14, 'P':15, 'Q':16, 'R':17, 'S':18, 'T':19, 'U':20, 'V':21, 'W':22, 'X':23, 'Y':24, 'Z':25}
 
-    mapped_text= []
-    for i in range(0,len(text)):
-        if text[i] in word:
-            mapped_text.append(word[text[i]])
+    if mode=='w2n':
+        mapped_text=[]
+        special_chars=".,?!$%^&*;:}{[]-_`~()@#\\|<>\n\t"
+
+        text= text.translate(str.maketrans('', '', special_chars))
+        text = text.replace(" ", "").upper()
+        
+        for ch in text:
+            mapped_text.append(chars[ch])
+
+        return mapped_text
     
-    return mapped_text
+    elif mode=='n2w':
+        reverse_chars = {v: k for k, v in chars.items()}
+        return [reverse_chars[n] for n in text]
 
 
 def generate_key(key):
     #key = np.random.randint(0,26,size=(2,2))
-    key = word_mapper(key)
+    key = word_mapper(key, 'w2n')
     key = np.array(key).reshape(2,2)
 
     det = int(np.round(np.linalg.det(key)))
@@ -109,12 +114,7 @@ def generate_key(key):
         return key
 
 
-
 def generate_ciphertext(plaintext, key):
-    
-    word = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5, "G":6, "H":7, "I":8, "J":9, "K":10, 
-            "L":11, "M":12, "N":13, "O":14, "P":15, "Q":16, "R":17, "S":18, "T":19, "U":20, 
-            "V":21, "W":22, "X":23, "Y":24,"Z":25}
     
     print_key = key
     key  = generate_key(key)
@@ -137,13 +137,7 @@ def generate_ciphertext(plaintext, key):
 
     # print("Ciphertext matrix: ", ciphertext)
 
-    for i in range(0,len(ciphertext)):
-        if ciphertext[i] in word.values():
-
-            for key, value in word.items():
-                if value == ciphertext[i]:
-                    ciphertext[i] = key
-
+    ciphertext = word_mapper(ciphertext, 'n2w')
     
     final_cipher= "".join(ciphertext)
     
@@ -181,60 +175,11 @@ def retrieve_plaintext(ciphertext, key):
 
     # print("Ciphertext matrix: ", ciphertext)
 
-    for i in range(0,len(plaintext)):
-        for key, value in word.items():
-            if value == plaintext[i]:
-                plaintext[i] = key
-                break
+    plaintext = word_mapper(plaintext, 'n2w')
 
-    
     final_plain= "".join(plaintext)
 
     return print(f"Plaintext- {final_plain}")
-
-
-
-
-
-
-
-# class HillCipher():
-
-#     def __init__(self, plaintext, key):
-#         self.plaintext = plaintext
-#         self.key = key
-        
-
-#     def generate_key(self):
-#         if self.key is None:
-#             self.key = np.random.randint(0,26,size=(2,2))
-#             print(f"Key ---> {self.key}")
-        
-#         return self.key
-
-#     def convert_plaintext(self):
-#         word = {"A":0, "B":1, "C":2, "D":3, "E":4, "F":5, "G":6, "H":7, "I":8, "J":9, "K":10, 
-#                 "L":11, "M":12, "N":13, "O":14, "P":15, "Q":16, "R":17, "S":18, "T":19, "U":20, 
-#                 "V":21, "W":22, "X":23, "Y":24,"Z":25}
-        
-#         special_chars=".,?!$%^&*;:}{[]-_`~()@#\'/\\|<>\n\t"
-
-#         plaintext= self.plaintext.translate(str.maketrans('', '', special_chars))
-#         self.plaintext= self.plaintext.upper()
-
-#         conv_plaintext= []
-#         if len(self.plaintext)%2!=0:
-#             self.plaintext+= "X"
-
-#         for i in range(0, len(self.plaintext), 1):
-#             conv_plaintext.append(self.plaintext[i:i+1])
-        
-
-#         for i in range(0,len(conv_plaintext)):
-#             if conv_plaintext[i] in word:
-#                 conv_plaintext[i] = word[conv_plaintext[i]]
-             
-#         return conv_plaintext
 
 
 

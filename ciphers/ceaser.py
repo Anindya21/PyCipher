@@ -20,9 +20,10 @@ def word_mapper(text,mode):
         return [reverse_chars[n] for n in text]
     
 
-
 def calculate_cipher(plaintext, shift):
+    plaintext= word_mapper(plaintext,"w2n")
     ciphertext= []
+
     for i in range(0,len(plaintext)):
         cipher_char= (plaintext[i] + shift) % 26
         ciphertext.append(cipher_char)
@@ -34,6 +35,7 @@ def calculate_cipher(plaintext, shift):
 
 
 def retrieve_plaintext(ciphertext,shift):
+    ciphertext= word_mapper(ciphertext,"w2n")
     plaintext=[]
 
     for i in range(0, len(ciphertext)):
@@ -54,12 +56,12 @@ mode = input("Choose Mode (E/D): ").upper()
 if mode == 'E':
     shift= int(input("Enter shift value: "))
     plaintext= input("Enter Plaintext: ")
-    ciphertext= calculate_cipher(word_mapper(plaintext,"w2n"), shift)
+    ciphertext= calculate_cipher(plaintext, shift)
     print(f"Ciphertext: {ciphertext}", end="")
 
 if mode == 'D':
     shift= int(input("Enter shift value: "))
     ciphertext= input("Enter Ciphertext: ")
-    plaintext= retrieve_plaintext(word_mapper(ciphertext,"w2n"), shift)
+    plaintext= retrieve_plaintext(ciphertext, shift)
     print(f"Plaintext: {plaintext}", end="")
 
