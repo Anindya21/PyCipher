@@ -89,5 +89,3 @@ Follow the on-screen prompts to:
 This project is licensed under the terms specified in the LICENSE file.
 
 ---
-
-**Note:** This project is for educational purposes. Classical ciphers are not secure for modern cryptographic applications.
