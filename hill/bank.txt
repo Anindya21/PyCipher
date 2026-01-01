@@ -34,3 +34,11 @@ Plaintext: [7, 4, 11, 11, 14, 13, 0, 5, 8, 18, 7, 14, 22, 0, 17, 4, 24, 14, 20, 
 Plaintext: [19, 14, 3, 0, 24, 8, 18, 19, 7, 4, 3, 0, 24, 22, 4, 3, 8, 4] 
  Key: hill
  Ciphertext: BUVYWUXPPWVYUSJNWE
+
+Plaintext: [7, 4, 8, 11, 7, 8, 19, 11, 4, 17, 19, 14, 12, 12, 14, 17, 17, 14, 22, 1, 4, 6, 8, 13, 0, 19, 19, 0, 2, 10, 14, 13, 10, 20, 17, 18, 10, 0, 19, 3, 0, 22, 13, 23] 
+ Key: hill
+ Ciphertext: PWVDHOUNHLBUIUZNNEJFQURZBBDWUWHVEOFWSCKDIIGT
+
+Plaintext: HEILHITLERTOMORROWDAWNBEGINTHEATTACKONKURSKX 
+ Key: hill
+ Ciphertext: PWVDHOUNHLBUEQULCQVYLHZAAGOBPWBBDWUWHVEOFWLV

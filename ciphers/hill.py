@@ -85,7 +85,7 @@ def word_mapper(text,mode):
 
     if mode=='w2n':
         mapped_text=[]
-        special_chars=".,?!$%^&*;:}{[]-_`~()@#\\|<>\n\t"
+        special_chars="0123456789.,?!$%^&*;:}{[]-_`~()@#\\|<>\n\t"
 
         text= text.translate(str.maketrans('', '', special_chars))
         text = text.replace(" ", "").upper()
@@ -101,7 +101,7 @@ def word_mapper(text,mode):
 
 
 def generate_key(key):
-    #key = np.random.randint(0,26,size=(2,2))
+    
     key = word_mapper(key, 'w2n')
     key = np.array(key).reshape(2,2)
 
@@ -141,6 +141,9 @@ def generate_ciphertext(plaintext, key):
     
     final_cipher= "".join(ciphertext)
     
+    plaintext = word_mapper(plaintext, 'n2w')
+    plaintext= "".join(plaintext)
+
     with open("../hill/bank.txt", "a") as f:
         f.write(f"\nPlaintext: {plaintext} \n Key: {print_key}\n Ciphertext: {final_cipher}\n")
 
@@ -202,7 +205,4 @@ elif mode.upper() == "D":
     key = input("Enter the 4 letter key: ")
     conv_ciphertext= convert_ciphertext(ciphertext)
     plain = retrieve_plaintext(conv_ciphertext, key)
-# ciphertext= input("Enter the ciphertext: ")
-# conv_ciphertext= convert_ciphertext(ciphertext)
 
-# print(conv_ciphertext)
