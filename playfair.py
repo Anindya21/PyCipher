@@ -257,7 +257,7 @@ def main():
             print(f"\nOriginal message:  {plaintext}")
             print(f"Preprocessed:      {''.join(digraphs)}")
             display_digraphs(digraphs)
-            print(f"\n🔒 CIPHERTEXT: {ciphertext}")
+            print(f"\n CIPHERTEXT: {ciphertext}")
             
         elif choice == '2':
             print("\nDecryption Mode")
@@ -274,7 +274,7 @@ def main():
             display_table(table)
             print(f"\nCiphertext:  {ciphertext}")
             display_digraphs(digraphs)
-            print(f"\n🔓 PLAINTEXT: {plaintext}")
+            print(f"\n PLAINTEXT: {plaintext}")
             
         elif choice == '3':
             run_tests()
