@@ -12,7 +12,7 @@ A comprehensive Python implementation of classical cryptographic ciphers includi
 ## 📁 Project Structure
 
 ```
-crypto_project/
+PyCipher/
 ├── ciphers/           # Cipher implementations
 ├── ui/                # User interface components
 ├── main.py            # Main application entry point
