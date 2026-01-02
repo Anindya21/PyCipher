@@ -1,6 +1,7 @@
 def show_menu():
     print("==================================================")
-    print("Welcome to the Cipher Suite")
+    print("Welcome to the PyCipher")
+    print("==================================================\n")
     print("Choose the cipher you want to use:")
     print("1. Ceaser Cipher")
     print("2. Affine Cipher")

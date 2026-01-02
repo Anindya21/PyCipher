@@ -73,7 +73,7 @@ def generate_key(key):
     if math.gcd(det,26) != 1:
         raise ValueError("The key matrix is not invertible. Please provide a valid key.")
     else:
-        print(f"Key ---> {key}")
+        # print(f"Key ---> {key}")
         return key
 
 
@@ -88,7 +88,7 @@ def generate_ciphertext(plaintext, key):
         
         pair = np.array([[plaintext[i], plaintext[i+1]]])
 
-        print(f"Pair matrix: {pair}")
+        # print(f"Pair matrix: {pair}")
 
         cipher_pair = np.matmul(pair, key)%26
         
@@ -125,7 +125,7 @@ def hill_retrieve_plaintext(ciphertext, key):
         
         pair = np.array([[ciphertext[i], ciphertext[i+1]]])
 
-        print(f"Pair matrix: {pair}")
+        # print(f"Pair matrix: {pair}")
 
         plain_pair = np.matmul(pair, key_inv)%26
         
