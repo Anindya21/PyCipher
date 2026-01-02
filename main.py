@@ -1,6 +1,8 @@
 from ciphers.ceaser import (calculate_cipher, retrieve_plaintext)
 from ciphers.hill import (hill_word_mapper, generate_ciphertext, hill_retrieve_plaintext)
 from ciphers.hill_attack import attack_hill
+from ciphers.affine import affine_encrypt, affine_decrypt
+from ciphers.playfair import encrypt as playfair_encrypt, decrypt as playfair_decrypt
 
 from ui.console import (
     show_menu,
@@ -35,6 +37,36 @@ def main():
             result= retrieve_plaintext(text, shift)
     
         show_result(result)
+
+    elif choice == "2":  # Affine Cipher
+
+        if mode == "E":
+            text = get_text("Enter the plaintext: ")
+            a = int(get_key("Enter key 'a' (coprime with 26): "))
+            b = int(get_key("Enter key 'b' (0-25): "))
+            result = affine_encrypt(text, a, b, include_non_alpha=True)
+
+        else:
+            text = get_text("Enter the ciphertext: ")
+            a = int(get_key("Enter key 'a' (coprime with 26): "))
+            b = int(get_key("Enter key 'b' (0-25): "))
+            result = affine_decrypt(text, a, b, include_non_alpha=True)
+
+        show_result(result)   
+
+    elif choice == "3":  # Playfair Cipher
+
+        if mode == "E":
+            text = get_text("Enter the plaintext: ")
+            key = get_key("Enter the key: ")
+            result, _, _ = playfair_encrypt(text, key)
+
+        else:
+            text = get_text("Enter the ciphertext: ")
+            key = get_key("Enter the key: ")
+            result, _, _ = playfair_decrypt(text, key)
+
+        show_result(result)     
 
     elif choice == "4":
 
