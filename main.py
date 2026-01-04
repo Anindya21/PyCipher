@@ -24,7 +24,7 @@ def main():
         print("Exiting program.")
         return
 
-    if choice == "1":
+    if choice == "1": # Caesar
         
         if mode== "E":
             text= get_text("Enter the plaintext: ")
@@ -68,7 +68,7 @@ def main():
 
         show_result(result)     
 
-    elif choice == "4":
+    elif choice == "4": # Hill
 
         if mode=="E":
             text = get_text("Enter the plaintext: ")
@@ -86,7 +86,7 @@ def main():
 
         show_result(result)
     
-    elif choice == "5":
+    elif choice == "5": # Hill Attack
 
         plain= get_text("Enter Known Plaintext: ")
         cipher= get_text("Enter Known Ciphertext: ")

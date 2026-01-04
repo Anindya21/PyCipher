@@ -33,7 +33,7 @@ PyCipher/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/crypto_project.git
+git clone https://github.com/Anindya21/PyCipher.git
 cd crypto_project
 ```
 
